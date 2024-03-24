@@ -1,0 +1,4 @@
+Product {Milk, 89, 1}
+Product {Bread, 26, 2}
+Product {Cheese, 125, 3}
+Product {Meat, 15, 4}

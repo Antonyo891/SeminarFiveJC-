@@ -1,9 +1,9 @@
 package buyer;
 
-import exceptions.NameIsEmptyException;
-import exceptions.AgeNegativeException;
+import exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BuyerController {
 private Buyer buyer;
@@ -23,11 +23,12 @@ private ArrayList<Buyer> buyers;
             System.out.println("Buyer already in the Market");
             return false;
         }
-        return addBuyer(buyer.getId(),buyer.getName(),
-                buyer.getAge(),buyer.getPhone(),buyer.getGender());
+        if (addBuyer(buyer.getId(),buyer.getName(),
+                buyer.getAge(),buyer.getPhone(),buyer.getGender())==null) return false;
+        return true;
     }
 
-    public boolean addBuyer(int idBuyer, String name, int age, String phone,Gender gender)
+    public Buyer addBuyer(int idBuyer, String name, int age, String phone,Gender gender)
             throws AgeNegativeException, NameIsEmptyException {
         if (age<0) throw new AgeNegativeException(age);
         if (name.isEmpty()) throw  new NameIsEmptyException(
@@ -38,12 +39,12 @@ private ArrayList<Buyer> buyers;
             if (idBuyer == buyer.getId()) {
                 System.out.println("Buyer with Id " + idBuyer +
                         " already EXIST");
-                return false;
+                return buyer;
             }
         }
-        buyers.add(new Buyer(idBuyer, name, age, phone, gender));
-        System.out.println("There are" + buyers.size() + " buyers in the Market.");
-        return true;
+        buyer = new Buyer(idBuyer, name, age, phone, gender);
+        buyers.add(buyer);
+        return buyer;
     }
 
     public Buyer createBuyer(String name, int age, String phone, Gender gender)
@@ -84,4 +85,25 @@ private ArrayList<Buyer> buyers;
         return null;
     }
 
+    public Buyer parse(String[] line) {
+        Gender gender = Gender.MAN;
+        try {
+            if (line[3].equalsIgnoreCase("woman")) gender = Gender.WOMAN;
+            int buyertId = Integer.parseInt(line[4]);
+            String name = line[1];
+            int age = Integer.parseInt(line[2]);
+            String phoneNumber = line[5];
+            return addBuyer(buyertId,name,age,phoneNumber,gender);
+        } catch (NumberFormatException e ){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        } catch (TittleIsEmptyException e){
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        } catch (NameIsEmptyException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        } catch (AgeNegativeException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+        System.out.println("The line" + Arrays.toString(line) + "could not be processed");
+        return null;
+    }
 }

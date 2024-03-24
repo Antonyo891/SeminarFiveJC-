@@ -3,10 +3,7 @@ package creator;
 import buyer.Buyer;
 import buyer.BuyerController;
 import buyer.Gender;
-import exceptions.AgeNegativeException;
-import exceptions.NameIsEmptyException;
-import exceptions.ProductPriceException;
-import exceptions.TittleIsEmptyException;
+import exceptions.*;
 import product.Product;
 import product.ProductController;
 
@@ -35,6 +32,8 @@ public class Creator {
         } catch (TittleIsEmptyException e){
             System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
+        } catch (IdException e){
+            System.out.println(e.getMessage());
         }
 
     }

@@ -3,6 +3,9 @@ import buyer.Gender;
 import exceptions.ProductNotFoundException;
 import exceptions.QuantityIsNegativeException;
 import exceptions.UserNotFoudException;
+import order.Holidays;
+import order.Order;
+import order.OrderStatus;
 import product.Product;
 
 import java.util.*;
@@ -58,9 +61,7 @@ public class Market {
             throws ProductNotFoundException, QuantityIsNegativeException {
         if (!products.contains(product)) throw new ProductNotFoundException("product not found");
         if (quantity <= 0) throw new QuantityIsNegativeException("quantity of product is negative");
-        for (Order order: this.orders) {
-            if (order.getId()==orderId) order.add(product, quantity);
-        }
+        getOrder(orderId).add(product,quantity);
     }
 
     public Map<Product,Integer> buy(int orderId){
@@ -68,21 +69,20 @@ public class Market {
             System.out.println("List of orders is empty");
             return null;
         }
-        for (Order order: orders) {
-            double totalSum;
-            if (orderId==order.getId()) {
-                order.setOrderStatus(OrderStatus.COMPLETED);
-                System.out.print(order.getBuyer().getName() +
-                        " ready to complete the order id= " +
-                        + order.getId() + ". ");
-                System.out.println(order);
-                totalSum = getTotalPrice(order);
-                System.out.println("The buy was completed successfully." +
-                        " Total SUM = " + totalSum +
-                        ". ");
-                return new HashMap<>(order.getProducts());
+        Order order;
+        double totalSum;
+        if (!((order = getOrder(orderId)) ==null)) {
+            order.setOrderStatus(OrderStatus.COMPLETED);
+            System.out.print(order.getBuyer().getName() +
+                    " ready to complete the order id= " +
+                    + order.getId() + ". ");
+            System.out.println(order);
+            totalSum = getTotalPrice(order);
+            System.out.println("The buy was completed successfully." +
+                    " Total SUM = " + totalSum +
+                    ". ");
+            return new HashMap<>(order.getProducts());
             }
-        }
         System.out.println("This order was not found");
         return null;
     }
@@ -137,5 +137,14 @@ public class Market {
         }
         System.out.println("This order are not exist");
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Market{" +
+                "buyers=" + buyers +
+                ", products=" + products +
+                ", orders=" + orders +
+                '}';
     }
 }

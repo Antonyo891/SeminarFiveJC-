@@ -1,7 +1,6 @@
 package product;
 
 public class Product {
-    private static final int NOT_SET_ID = -1;
     private String title;
     private int price;
 
@@ -40,11 +39,13 @@ public class Product {
     void setId(int newId){
         this.id = newId;
     }
+
     @Override
     public String toString() {
-        return "product.Product{" +
-                "title='" + title + '\'' +
-                ", price=" + price +
+        return "Product {" +
+                title +
+                ", " + price +
+                ", " + id +
                 '}';
     }
 }

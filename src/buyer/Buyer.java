@@ -65,12 +65,12 @@ public class Buyer {
 
     @Override
     public String toString() {
-        return "Buyer{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", id=" + id +
-                ", phone='" + phone + '\'' +
+        return "Buyer{ " +
+                name +
+                ", " + age +
+                ", " + gender +
+                ", " + id +
+                ", " + phone +
                 '}';
     }
 

@@ -1,0 +1,7 @@
+Buyer{ Tom, 45, MAN, 1, 11111}
+Buyer{ Lis, 26, WOMAN, 2, 22222}
+Buyer{ Jim, 53, MAN, 3, 33333}
+Buyer{ John, 40, MAN, 4, 44444}
+Buyer{ John, 45, MAN, 8, 44424}
+Buyer{ Ivan, 23, MAN, 9, 44424}
+Buyer{ John, 45, MAN, 11, 44424}
