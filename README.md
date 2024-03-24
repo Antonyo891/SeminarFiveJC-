@@ -8,7 +8,7 @@
 ### Дописать сохранение объектов магазина в файлы, соответсвующие типам объектов.
 Создал класс [FileWorker](https://github.com/Antonyo891/SeminarFiveJC-/blob/SeminarFiveHW/src/FileWorker.java) для работы с файлами.
 Добавил методы parse() в контроллеры [покупателей](https://github.com/Antonyo891/SeminarFiveJC-/blob/SeminarFiveHW/src/buyer/BuyerController.java), [продуктов](https://github.com/Antonyo891/SeminarFiveJC-/blob/SeminarFiveHW/src/product/ProductController.java) и [заказов](https://github.com/Antonyo891/SeminarFiveJC-/blob/SeminarFiveHW/src/order/OrderController.java).
-С заказами все оказалось непросто так как там упоминаютс и продукты и покупатели...или я перемудрил...
+С заказами все оказалось непросто так как там упоминаются и продукты и покупатели...или я перемудрил...
 ```
 public Order parse(String[] line, BuyerController buyerController,
                        ProductController productController) {
